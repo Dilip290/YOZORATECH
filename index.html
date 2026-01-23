@@ -303,7 +303,7 @@
         }
 
         .hero-text h1 {
-            font-size: 3.2rem;
+            font-size: 3.6rem;
             margin-bottom: 25px;
             line-height: 1.1;
             background: linear-gradient(90deg, #fff, var(--secondary));
@@ -1088,9 +1088,16 @@
         }
 
         /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .hero-text h1 {
+                font-size: 3.4rem;
+                white-space: normal;
+            }
+        }
+
         @media (max-width: 1024px) {
             .hero-text h1 {
-                font-size: 2.8rem;
+                font-size: 3rem;
                 white-space: normal;
             }
             
@@ -1154,7 +1161,7 @@
             }
             
             .hero-text h1 {
-                font-size: 2.4rem;
+                font-size: 2.6rem;
                 white-space: normal;
             }
             
@@ -1190,7 +1197,7 @@
 
         @media (max-width: 576px) {
             .hero-text h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .services-grid {
@@ -1221,6 +1228,14 @@
             .hero-tag {
                 padding: 8px 16px;
                 font-size: 0.9rem;
+            }
+        }
+
+        /* Custom breakpoint for laptop optimal title display */
+        @media (min-width: 992px) and (max-width: 1400px) {
+            .hero-text h1 {
+                font-size: 3.5rem;
+                max-width: 900px;
             }
         }
     </style>
