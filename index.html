@@ -43,53 +43,25 @@
             position: relative;
         }
 
-        /* Logo Watermark Background - Fixed position */
+        /* Logo Watermark Background */
         .logo-watermark {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://drive.google.com/thumbnail?id=1dmW7oO8-1LZe8zDSjGaYKPjUdiY830lo&sz=w1000');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: 300px;
-            opacity: 0.03;
+            background-image: url('https://drive.google.com/thumbnail?id=1MMQNDQawcpbK2M5qwN9qi6kvU31oY0-r&sz=w1000');
+            background-repeat: repeat;
+            background-size: 250px;
+            opacity: 0.02;
             z-index: -1;
             pointer-events: none;
+            animation: floatBackground 60s linear infinite;
         }
 
-        /* Floating Bubbles */
-        .floating-bubbles {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(0, 200, 150, 0.1);
-            border: 1px solid rgba(0, 200, 150, 0.2);
-            animation: floatBubble 15s infinite ease-in-out;
-        }
-
-        @keyframes floatBubble {
-            0%, 100% { 
-                transform: translateY(0) translateX(0) scale(1);
-                opacity: 0.3;
-            }
-            33% { 
-                transform: translateY(-100px) translateX(50px) scale(1.1);
-                opacity: 0.4;
-            }
-            66% { 
-                transform: translateY(50px) translateX(-50px) scale(0.9);
-                opacity: 0.2;
-            }
+        @keyframes floatBackground {
+            0% { background-position: 0 0; }
+            100% { background-position: 250px 250px; }
         }
 
         h1, h2, h3, h4 {
@@ -128,31 +100,22 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--secondary), var(--blue));
             color: white;
-            animation: btnGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes btnGlow {
-            0%, 100% { box-shadow: 0 5px 15px rgba(0, 200, 150, 0.3); }
-            50% { box-shadow: 0 5px 20px rgba(0, 200, 150, 0.5); }
         }
 
         .btn-primary:hover {
             background: linear-gradient(135deg, var(--blue), var(--secondary));
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 200, 150, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 200, 150, 0.3);
         }
 
         .btn-secondary {
             background-color: transparent;
             color: var(--primary);
             border: 2px solid var(--primary);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .btn-secondary:hover {
             background-color: rgba(13, 27, 54, 0.05);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(13, 27, 54, 0.15);
         }
 
         .btn-large {
@@ -163,14 +126,6 @@
         section {
             padding: 80px 0;
             position: relative;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .section-title {
@@ -179,12 +134,6 @@
             color: var(--primary);
             font-size: 2.5rem;
             position: relative;
-            animation: titleFloat 6s ease-in-out infinite;
-        }
-
-        @keyframes titleFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
         }
 
         .section-title::after {
@@ -197,25 +146,17 @@
             height: 4px;
             background: linear-gradient(90deg, var(--secondary), var(--accent), var(--purple));
             border-radius: 2px;
-            animation: expandWidth 3s ease-in-out infinite;
-        }
-
-        @keyframes expandWidth {
-            0%, 100% { width: 60px; }
-            50% { width: 80px; }
         }
 
         /* NAVBAR */
         nav {
-            background-color: rgba(13, 27, 54, 0.95);
-            backdrop-filter: blur(10px);
+            background-color: var(--primary);
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
             padding: 15px 0;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .nav-container {
@@ -237,8 +178,7 @@
         }
 
         .logo-img:hover {
-            transform: scale(1.1) rotate(360deg);
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: scale(1.05) rotate(5deg);
         }
 
         .logo-text {
@@ -261,27 +201,10 @@
             font-weight: 500;
             position: relative;
             transition: var(--transition);
-            padding: 5px 0;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--secondary), var(--accent));
-            transition: width 0.3s ease;
-            border-radius: 1px;
         }
 
         .nav-links a:hover {
             color: white;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
         }
 
         .nav-links a.active {
@@ -289,13 +212,14 @@
         }
 
         .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
             width: 100%;
-            animation: activePulse 2s ease-in-out infinite;
-        }
-
-        @keyframes activePulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            border-radius: 2px;
         }
 
         .nav-cta {
@@ -328,6 +252,25 @@
             overflow: hidden;
         }
 
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 140%;
+            height: 200%;
+            background: url('https://drive.google.com/thumbnail?id=1MMQNDQawcpbK2M5qwN9qi6kvU31oY0-r&sz=w1000') no-repeat center center;
+            background-size: contain;
+            opacity: 0.03;
+            pointer-events: none;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
         .hero-content {
             display: flex;
             align-items: center;
@@ -339,18 +282,6 @@
         .hero-text {
             flex: 1;
             max-width: 600px;
-            animation: slideInLeft 1s ease-out;
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         .hero-text h1 {
@@ -361,12 +292,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: textShine 3s ease-in-out infinite;
-        }
-
-        @keyframes textShine {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
         }
 
         .hero-subtitle {
@@ -379,12 +304,6 @@
         .hero-subtitle span {
             color: var(--secondary);
             font-weight: 500;
-            animation: colorPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes colorPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
         }
 
         .hero-buttons {
@@ -398,18 +317,6 @@
             display: flex;
             justify-content: flex-end;
             position: relative;
-            animation: slideInRight 1s ease-out 0.3s both;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         .logo-illustration {
@@ -453,18 +360,11 @@
             border-radius: var(--radius);
             padding: 35px 25px;
             box-shadow: 0 10px 30px var(--shadow);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: var(--transition);
             text-align: center;
             border: 1px solid rgba(0, 0, 0, 0.03);
             position: relative;
             overflow: hidden;
-            animation: cardFloat 6s ease-in-out infinite;
-            animation-delay: calc(var(--i) * 0.2s);
-        }
-
-        @keyframes cardFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
         }
 
         .service-card::before {
@@ -475,24 +375,17 @@
             width: 100%;
             height: 4px;
             background: linear-gradient(90deg, var(--secondary), var(--purple), var(--accent));
-            animation: rainbow 3s linear infinite;
-        }
-
-        @keyframes rainbow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
         }
 
         .service-card:hover {
-            transform: translateY(-15px) scale(1.03);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
         }
 
         .service-card:hover .service-icon {
             background: linear-gradient(135deg, var(--secondary), var(--purple));
             color: white;
-            transform: rotate(360deg) scale(1.1);
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: rotate(15deg) scale(1.1);
         }
 
         .service-icon {
@@ -507,7 +400,7 @@
             color: var(--secondary);
             font-size: 28px;
             border: 2px solid rgba(0, 200, 150, 0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: var(--transition);
         }
 
         .service-card h3 {
@@ -528,12 +421,6 @@
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
             border: 1px solid rgba(0, 0, 0, 0.05);
-            animation: sectionFloat 8s ease-in-out infinite;
-        }
-
-        @keyframes sectionFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
         }
 
         .about-content {
@@ -563,12 +450,6 @@
             transform: translate(-50%, -50%);
             box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.3),
                         inset 10px 10px 20px rgba(255, 255, 255, 0.1);
-            animation: planetRotate 30s linear infinite;
-        }
-
-        @keyframes planetRotate {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
         .planet-decoration::before {
@@ -582,7 +463,6 @@
             left: 50%;
             transform: translate(-50%, -50%) rotate(45deg);
             opacity: 0.7;
-            animation: ringRotate 20s linear infinite reverse;
         }
 
         .planet-decoration::after {
@@ -596,12 +476,6 @@
             left: 50%;
             transform: translate(-50%, -50%) rotate(-15deg);
             opacity: 0.7;
-            animation: ringRotate 15s linear infinite;
-        }
-
-        @keyframes ringRotate {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
         .positive-message-container {
@@ -614,12 +488,6 @@
             position: relative;
             z-index: 2;
             border: 2px solid rgba(0, 200, 150, 0.1);
-            animation: messageFloat 5s ease-in-out infinite;
-        }
-
-        @keyframes messageFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
         }
 
         .positive-message-container h3 {
@@ -642,12 +510,6 @@
             display: block;
             margin-top: 15px;
             font-size: 1.2rem;
-            animation: highlightPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes highlightPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.05); }
         }
 
         .positive-message-container i {
@@ -655,13 +517,6 @@
             font-size: 2rem;
             margin-bottom: 20px;
             display: block;
-            animation: rocketFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes rocketFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-10px) rotate(5deg); }
-            75% { transform: translateY(10px) rotate(-5deg); }
         }
 
         .about-right {
@@ -686,12 +541,6 @@
             height: 4px;
             background: linear-gradient(90deg, var(--secondary), var(--accent));
             border-radius: 2px;
-            animation: linePulse 2s ease-in-out infinite;
-        }
-
-        @keyframes linePulse {
-            0%, 100% { width: 60px; }
-            50% { width: 80px; }
         }
 
         .checklist {
@@ -702,17 +551,6 @@
             margin-bottom: 15px;
             display: flex;
             align-items: flex-start;
-            opacity: 0;
-            transform: translateX(-20px);
-            animation: slideInCheck 0.5s ease forwards;
-            animation-delay: calc(var(--i) * 0.1s);
-        }
-
-        @keyframes slideInCheck {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         .checklist i {
@@ -723,13 +561,6 @@
             margin-right: 15px;
             font-size: 1.2rem;
             margin-top: 3px;
-            animation: checkSpin 2s ease-in-out infinite;
-        }
-
-        @keyframes checkSpin {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(10deg); }
-            75% { transform: rotate(-10deg); }
         }
 
         /* TESTIMONIALS */
@@ -752,17 +583,16 @@
             left: 0;
             width: 100%;
             opacity: 0;
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transition: opacity 0.8s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            transform: translateX(50px);
         }
 
         .testimonial-slide.active {
             opacity: 1;
-            transform: translateX(0);
+            position: relative;
         }
 
         .testimonial-card {
@@ -773,12 +603,6 @@
             margin-bottom: 30px;
             position: relative;
             border: 2px solid rgba(0, 200, 150, 0.1);
-            animation: testimonialFloat 6s ease-in-out infinite;
-        }
-
-        @keyframes testimonialFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
         }
 
         .testimonial-card::before {
@@ -794,12 +618,6 @@
             font-family: serif;
             line-height: 1;
             opacity: 0.3;
-            animation: quoteFloat 4s ease-in-out infinite;
-        }
-
-        @keyframes quoteFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
 
         .testimonial-text {
@@ -816,18 +634,6 @@
             align-items: center;
             justify-content: center;
             gap: 15px;
-            animation: slideInUp 0.6s ease-out;
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .client-avatar {
@@ -842,12 +648,6 @@
             font-size: 1.5rem;
             font-weight: 600;
             box-shadow: 0 5px 15px rgba(0, 200, 150, 0.3);
-            animation: avatarPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes avatarPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
         }
 
         .client-details h4 {
@@ -883,18 +683,12 @@
             font-size: 1.2rem;
             color: var(--primary);
             border: 2px solid rgba(0, 200, 150, 0.1);
-            animation: arrowFloat 4s ease-in-out infinite;
-        }
-
-        @keyframes arrowFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
 
         .slider-arrow:hover {
             background: linear-gradient(135deg, var(--secondary), var(--purple));
             color: white;
-            transform: translateY(-3px) scale(1.1);
+            transform: translateY(-3px);
         }
 
         .testimonial-dots {
@@ -909,24 +703,11 @@
             background-color: rgba(13, 27, 54, 0.2);
             cursor: pointer;
             transition: var(--transition);
-            animation: dotPulse 2s ease-in-out infinite;
-            animation-delay: calc(var(--i) * 0.2s);
-        }
-
-        @keyframes dotPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.3); }
         }
 
         .dot.active {
             background: linear-gradient(135deg, var(--secondary), var(--accent));
             transform: scale(1.3);
-            animation: activeDotPulse 1s ease-in-out infinite;
-        }
-
-        @keyframes activeDotPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
         }
 
         .testimonial-cta {
@@ -941,12 +722,6 @@
             padding: 60px;
             border: 1px solid rgba(0, 0, 0, 0.05);
             text-align: center;
-            animation: contactFloat 7s ease-in-out infinite;
-        }
-
-        @keyframes contactFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
         }
 
         .contact-message {
@@ -966,12 +741,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: 600;
-            animation: textGradient 3s ease-in-out infinite;
-        }
-
-        @keyframes textGradient {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
         }
 
         .contact-cards {
@@ -987,7 +756,7 @@
             border-radius: var(--radius);
             padding: 40px 30px;
             box-shadow: 0 10px 30px var(--shadow);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: var(--transition);
             text-align: center;
             border: 2px solid rgba(0, 200, 150, 0.1);
             min-width: 250px;
@@ -995,14 +764,6 @@
             max-width: 300px;
             position: relative;
             overflow: hidden;
-            animation: cardBounce 8s ease-in-out infinite;
-            animation-delay: calc(var(--i) * 0.3s);
-        }
-
-        @keyframes cardBounce {
-            0%, 100% { transform: translateY(0); }
-            25% { transform: translateY(-15px); }
-            75% { transform: translateY(5px); }
         }
 
         .contact-card::after {
@@ -1012,21 +773,15 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('https://drive.google.com/thumbnail?id=1dmW7oO8-1LZe8zDSjGaYKPjUdiY830lo&sz=w1000') no-repeat center;
+            background: url('https://drive.google.com/thumbnail?id=1MMQNDQawcpbK2M5qwN9qi6kvU31oY0-r&sz=w1000') no-repeat center;
             background-size: 80px;
             opacity: 0.03;
             pointer-events: none;
-            animation: logoRotate 20s linear infinite;
-        }
-
-        @keyframes logoRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
 
         .contact-card:hover {
-            transform: translateY(-15px) scale(1.05);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             border-color: var(--secondary);
         }
 
@@ -1044,12 +799,6 @@
             border: 2px solid rgba(0, 200, 150, 0.2);
             position: relative;
             z-index: 1;
-            animation: iconFloat 5s ease-in-out infinite;
-        }
-
-        @keyframes iconFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
         }
 
         .contact-card h3 {
@@ -1078,18 +827,12 @@
             transition: var(--transition);
             position: relative;
             z-index: 1;
-            animation: linkGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes linkGlow {
-            0%, 100% { box-shadow: 0 5px 15px rgba(0, 200, 150, 0.3); }
-            50% { box-shadow: 0 5px 20px rgba(0, 200, 150, 0.5); }
         }
 
         .contact-link:hover {
             background: linear-gradient(135deg, var(--blue), var(--secondary));
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 200, 150, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 200, 150, 0.3);
         }
 
         .contact-cta {
@@ -1100,12 +843,6 @@
             background: linear-gradient(135deg, rgba(0, 200, 150, 0.05), rgba(138, 79, 255, 0.05));
             border-radius: var(--radius);
             border-left: 4px solid var(--secondary);
-            animation: ctaPulse 4s ease-in-out infinite;
-        }
-
-        @keyframes ctaPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
         }
 
         /* FOOTER */
@@ -1115,6 +852,19 @@
             padding: 70px 0 30px;
             position: relative;
             overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: url('https://drive.google.com/thumbnail?id=1MMQNDQawcpbK2M5qwN9qi6kvU31oY0-r&sz=w1000') no-repeat;
+            background-size: contain;
+            opacity: 0.03;
+            pointer-events: none;
         }
 
         .footer-container {
@@ -1142,12 +892,6 @@
             height: 3px;
             background: linear-gradient(90deg, var(--secondary), var(--accent));
             border-radius: 2px;
-            animation: footerLine 3s ease-in-out infinite;
-        }
-
-        @keyframes footerLine {
-            0%, 100% { width: 40px; }
-            50% { width: 60px; }
         }
 
         .footer-logo {
@@ -1155,12 +899,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            animation: footerLogoFloat 6s ease-in-out infinite;
-        }
-
-        @keyframes footerLogoFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
 
         .footer-logo-img {
@@ -1192,27 +930,10 @@
         .footer-contact i {
             color: var(--secondary);
             margin-right: 8px;
-            animation: contactIcon 2s ease-in-out infinite;
-        }
-
-        @keyframes contactIcon {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
         }
 
         .footer-links li, .footer-services li {
             margin-bottom: 12px;
-            opacity: 0;
-            transform: translateX(-20px);
-            animation: slideInFooter 0.5s ease forwards;
-            animation-delay: calc(var(--i) * 0.1s);
-        }
-
-        @keyframes slideInFooter {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         .footer-links a, .footer-services a {
@@ -1238,12 +959,6 @@
         .footer-links a:hover::before, .footer-services a:hover::before {
             opacity: 1;
             left: 0;
-            animation: arrowBounce 0.5s ease;
-        }
-
-        @keyframes arrowBounce {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(5px); }
         }
 
         .social-links {
@@ -1263,20 +978,12 @@
             transition: var(--transition);
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: socialFloat 4s ease-in-out infinite;
-            animation-delay: calc(var(--i) * 0.2s);
-        }
-
-        @keyframes socialFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
         }
 
         .social-icon:hover {
             background: linear-gradient(135deg, var(--secondary), var(--purple));
-            transform: translateY(-5px) scale(1.1);
+            transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            animation: none;
         }
 
         .footer-bottom {
@@ -1287,12 +994,6 @@
             color: rgba(255, 255, 255, 0.6);
             position: relative;
             z-index: 1;
-            animation: footerTextFloat 5s ease-in-out infinite;
-        }
-
-        @keyframes footerTextFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
         }
 
         /* RESPONSIVE */
@@ -1329,7 +1030,7 @@
             }
             
             .logo-watermark {
-                background-size: 250px;
+                background-size: 200px;
             }
         }
 
@@ -1406,7 +1107,7 @@
             }
             
             .logo-watermark {
-                background-size: 200px;
+                background-size: 150px;
             }
         }
 
@@ -1437,7 +1138,7 @@
             }
             
             .logo-watermark {
-                background-size: 150px;
+                background-size: 120px;
             }
         }
     </style>
@@ -1446,14 +1147,11 @@
     <!-- Logo Watermark Background -->
     <div class="logo-watermark"></div>
     
-    <!-- Floating Bubbles -->
-    <div class="floating-bubbles" id="bubbles"></div>
-    
     <!-- NAVBAR -->
     <nav id="navbar">
         <div class="container nav-container">
             <div class="logo-container">
-                <img src="https://drive.google.com/thumbnail?id=1dmW7oO8-1LZe8zDSjGaYKPjUdiY830lo&sz=w1000" alt="YozoraTech Logo" class="logo-img">
+                <img src="https://drive.google.com/thumbnail?id=1MMQNDQawcpbK2M5qwN9qi6kvU31oY0-r&sz=w1000" alt="YozoraTech Logo" class="logo-img">
                 <span class="logo-text">YozoraTech</span>
             </div>
             
@@ -1474,6 +1172,7 @@
                 <span></span>
             </button>
         </div>
+
     </nav>
 
     <!-- HERO SECTION -->
@@ -1488,7 +1187,7 @@
                 </div>
             </div>
             <div class="hero-illustration">
-                <img src="https://drive.google.com/thumbnail?id=1dmW7oO8-1LZe8zDSjGaYKPjUdiY830lo&sz=w1000" alt="YozoraTech Rocket Logo" class="logo-illustration">
+                <img src="https://drive.google.com/thumbnail?id=1uonl-qqWHMEV9xjJBVrOaMrK2f7OkwOH&sz=w1000" alt="YozoraTech Rocket Logo" class="logo-illustration">
             </div>
         </div>
         <div class="wave-separator">
@@ -1503,28 +1202,28 @@
         <div class="container">
             <h2 class="section-title">Our Services</h2>
             <div class="services-grid">
-                <div class="service-card" style="--i: 0;">
+                <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-code"></i>
                     </div>
                     <h3>Web Development</h3>
                     <p>Custom websites & web applications built with modern technologies for optimal performance and scalability.</p>
                 </div>
-                <div class="service-card" style="--i: 1;">
+                <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-palette"></i>
                     </div>
                     <h3>UI/UX Design</h3>
                     <p>User-friendly & modern interfaces designed to enhance user experience and drive engagement.</p>
                 </div>
-                <div class="service-card" style="--i: 2;">
+                <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
                     <h3>Responsive Design</h3>
                     <p>Mobile-first & adaptive layouts that look perfect on all devices, from smartphones to desktops.</p>
                 </div>
-                <div class="service-card" style="--i: 3;">
+                <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-cloud"></i>
                     </div>
@@ -1554,12 +1253,12 @@
                         <h2>Why Choose YozoraTech?</h2>
                         <p>We combine technical expertise with creative design to deliver web solutions that drive business growth. Our team stays ahead of industry trends to ensure your digital presence is both modern and effective.</p>
                         <ul class="checklist">
-                            <li style="--i: 0;"><i class="fas fa-check-circle"></i> <strong>Experienced Team:</strong> Skilled professionals with diverse expertise</li>
-                            <li style="--i: 1;"><i class="fas fa-check-circle"></i> <strong>Modern Tech Stack:</strong> Latest frameworks and technologies</li>
-                            <li style="--i: 2;"><i class="fas fa-check-circle"></i> <strong>Agile Development:</strong> Flexible and iterative approach</li>
-                            <li style="--i: 3;"><i class="fas fa-check-circle"></i> <strong>On-Time Delivery:</strong> We respect deadlines and budgets</li>
-                            <li style="--i: 4;"><i class="fas fa-check-circle"></i> <strong>Client-Focused:</strong> Your success is our priority</li>
-                            <li style="--i: 5;"><i class="fas fa-check-circle"></i> <strong>Quality Assurance:</strong> Rigorous testing for flawless results</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Experienced Team:</strong> Skilled professionals with diverse expertise</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Modern Tech Stack:</strong> Latest frameworks and technologies</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Agile Development:</strong> Flexible and iterative approach</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>On-Time Delivery:</strong> We respect deadlines and budgets</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Client-Focused:</strong> Your success is our priority</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Quality Assurance:</strong> Rigorous testing for flawless results</li>
                         </ul>
                     </div>
                 </div>
@@ -1618,9 +1317,9 @@
                     <i class="fas fa-chevron-left"></i>
                 </div>
                 <div class="testimonial-dots">
-                    <span class="dot active" data-index="0" style="--i: 0;"></span>
-                    <span class="dot" data-index="1" style="--i: 1;"></span>
-                    <span class="dot" data-index="2" style="--i: 2;"></span>
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
                 </div>
                 <div class="slider-arrow" id="nextTestimonial">
                     <i class="fas fa-chevron-right"></i>
@@ -1645,7 +1344,7 @@
             </p>
             
             <div class="contact-cards">
-                <div class="contact-card" style="--i: 0;">
+                <div class="contact-card">
                     <div class="contact-card-icon">
                         <i class="fas fa-envelope"></i>
                     </div>
@@ -1654,7 +1353,7 @@
                     <a href="mailto:admin@yozoratech.com" class="contact-link">Send Email</a>
                 </div>
                 
-                <div class="contact-card" style="--i: 1;">
+                <div class="contact-card">
                     <div class="contact-card-icon">
                         <i class="fas fa-phone"></i>
                     </div>
@@ -1663,7 +1362,7 @@
                     <a href="tel:+918688823142" class="contact-link">Call Now</a>
                 </div>
                 
-                <div class="contact-card" style="--i: 2;">
+                <div class="contact-card">
                     <div class="contact-card-icon">
                         <i class="fab fa-linkedin"></i>
                     </div>
@@ -1686,7 +1385,7 @@
             <div class="footer-container">
                 <div class="footer-col">
                     <div class="footer-logo">
-                        <img src="https://drive.google.com/thumbnail?id=1dmW7oO8-1LZe8zDSjGaYKPjUdiY830lo&sz=w1000" alt="YozoraTech Logo" class="footer-logo-img">
+                        <img src="https://drive.google.com/thumbnail?id=1MMQNDQawcpbK2M5qwN9qi6kvU31oY0-r&sz=w1000" alt="YozoraTech Logo" class="footer-logo-img">
                         <span class="footer-logo-text">YozoraTech</span>
                     </div>
                     <p class="footer-description">Professional web development & digital solutions. We build scalable, stunning web experiences that drive business growth and innovation.</p>
@@ -1699,20 +1398,20 @@
                 <div class="footer-col">
                     <h4>Quick Links</h4>
                     <ul class="footer-links">
-                        <li style="--i: 0;"><a href="#home">Home</a></li>
-                        <li style="--i: 1;"><a href="#services">Services</a></li>
-                        <li style="--i: 2;"><a href="#about">About</a></li>
-                        <li style="--i: 3;"><a href="#contact">Contact</a></li>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-col">
                     <h4>Our Services</h4>
                     <ul class="footer-services">
-                        <li style="--i: 0;"><a href="#services">Web Development</a></li>
-                        <li style="--i: 1;"><a href="#services">UI/UX Design</a></li>
-                        <li style="--i: 2;"><a href="#services">Responsive Design</a></li>
-                        <li style="--i: 3;"><a href="#services">Cloud & DevOps</a></li>
+                        <li><a href="#services">Web Development</a></li>
+                        <li><a href="#services">UI/UX Design</a></li>
+                        <li><a href="#services">Responsive Design</a></li>
+                        <li><a href="#services">Cloud & DevOps</a></li>
                     </ul>
                 </div>
                 
@@ -1720,13 +1419,13 @@
                     <h4>Connect</h4>
                     <p>Follow our journey and stay updated</p>
                     <div class="social-links">
-                        <a href="https://www.linkedin.com/company/yozora-technologies-private-limited/" target="_blank" class="social-icon" style="--i: 0;">
+                        <a href="https://www.linkedin.com/company/yozora-technologies-private-limited/" target="_blank" class="social-icon">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="#" class="social-icon" style="--i: 1;">
+                        <a href="#" class="social-icon">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="#" class="social-icon" style="--i: 2;">
+                        <a href="#" class="social-icon">
                             <i class="fab fa-github"></i>
                         </a>
                     </div>
@@ -1762,12 +1461,10 @@
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 100) {
                 navbar.style.padding = '10px 0';
-                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.15)';
-                navbar.style.backgroundColor = 'rgba(13, 27, 54, 0.98)';
+                navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
             } else {
                 navbar.style.padding = '15px 0';
-                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
-                navbar.style.backgroundColor = 'rgba(13, 27, 54, 0.95)';
+                navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
             }
             
             // Update active nav link
@@ -1787,17 +1484,6 @@
                 link.classList.remove('active');
                 if (link.getAttribute('href') === `#${current}`) {
                     link.classList.add('active');
-                }
-            });
-            
-            // Section animation on scroll
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                const windowHeight = window.innerHeight;
-                
-                if (window.scrollY > sectionTop - windowHeight + 200) {
-                    section.classList.add('visible');
                 }
             });
         });
@@ -1871,59 +1557,9 @@
             card.addEventListener('click', function() {
                 this.style.transform = 'translateY(-5px) scale(1.02)';
                 setTimeout(() => {
-                    this.style.transform = 'translateY(-15px) scale(1.05)';
+                    this.style.transform = 'translateY(-10px)';
                 }, 150);
             });
-        });
-        
-        // Create floating bubbles
-        const bubblesContainer = document.getElementById('bubbles');
-        const colors = ['rgba(0, 200, 150, 0.1)', 'rgba(138, 79, 255, 0.1)', 'rgba(255, 107, 53, 0.1)', 'rgba(74, 111, 255, 0.1)'];
-        
-        for (let i = 0; i < 15; i++) {
-            const bubble = document.createElement('div');
-            bubble.classList.add('bubble');
-            
-            const size = Math.random() * 40 + 20;
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            const duration = Math.random() * 15 + 10;
-            const delay = Math.random() * 5;
-            const left = Math.random() * 100;
-            const top = Math.random() * 100;
-            
-            bubble.style.width = `${size}px`;
-            bubble.style.height = `${size}px`;
-            bubble.style.background = color;
-            bubble.style.left = `${left}%`;
-            bubble.style.top = `${top}%`;
-            bubble.style.animationDuration = `${duration}s`;
-            bubble.style.animationDelay = `${delay}s`;
-            bubble.style.borderColor = color.replace('0.1', '0.3');
-            
-            bubblesContainer.appendChild(bubble);
-        }
-        
-        // Add hover effect to service cards
-        document.querySelectorAll('.service-card').forEach((card, index) => {
-            card.style.setProperty('--i', index);
-            
-            card.addEventListener('mouseenter', () => {
-                card.style.zIndex = '10';
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.zIndex = '1';
-            });
-        });
-        
-        // Add animation to checklist items
-        document.querySelectorAll('.checklist li').forEach((item, index) => {
-            item.style.setProperty('--i', index);
-        });
-        
-        // Add animation to footer items
-        document.querySelectorAll('.footer-links li, .footer-services li').forEach((item, index) => {
-            item.style.setProperty('--i', index);
         });
     </script>
 </body>
