@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YozoraTech | Web Development Solutions</title>
+    <title>Yozora Technologies | Web Development Solutions</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -243,32 +243,37 @@
             transition: var(--transition);
         }
 
-        /* HERO SECTION */
+        /* HERO SECTION - UPDATED */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, #1a2b4e 100%);
             color: white;
             padding: 160px 0 100px;
             position: relative;
             overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
 
-        .hero::before {
-            content: '';
+        .hero-background {
             position: absolute;
-            top: -50%;
-            left: -20%;
-            width: 140%;
-            height: 200%;
-            background: url('https://drive.google.com/thumbnail?id=1MMQNDQawcpbK2M5qwN9qi6kvU31oY0-r&sz=w1000') no-repeat center center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://drive.google.com/thumbnail?id=1uonl-qqWHMEV9xjJBVrOaMrK2f7OkwOH&sz=w2000');
             background-size: contain;
-            opacity: 0.03;
-            pointer-events: none;
+            background-position: center right;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            mix-blend-mode: screen;
+            z-index: 0;
             animation: float 20s ease-in-out infinite;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.15; }
+            50% { transform: translateY(-20px) scale(1.02); opacity: 0.2; }
         }
 
         .hero-content {
@@ -276,12 +281,15 @@
             align-items: center;
             justify-content: space-between;
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            width: 100%;
         }
 
         .hero-text {
             flex: 1;
-            max-width: 600px;
+            max-width: 700px;
+            position: relative;
+            z-index: 3;
         }
 
         .hero-text h1 {
@@ -292,43 +300,38 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .hero-subtitle {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: 35px;
             font-weight: 300;
+            line-height: 1.6;
         }
 
         .hero-subtitle span {
             color: var(--secondary);
             font-weight: 500;
+            background: rgba(0, 200, 150, 0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin: 0 8px 8px 0;
+            display: inline-block;
+            border: 1px solid rgba(0, 200, 150, 0.3);
+            transition: var(--transition);
+        }
+
+        .hero-subtitle span:hover {
+            background: rgba(0, 200, 150, 0.2);
+            transform: translateY(-2px);
         }
 
         .hero-buttons {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
-        }
-
-        .hero-illustration {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-            position: relative;
-        }
-
-        .logo-illustration {
-            width: 100%;
-            max-width: 500px;
-            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
         }
 
         .wave-separator {
@@ -339,6 +342,7 @@
             overflow: hidden;
             line-height: 0;
             transform: rotate(180deg);
+            z-index: 2;
         }
 
         .wave-separator svg {
@@ -351,7 +355,7 @@
         /* SERVICES SECTION */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
         }
 
@@ -412,6 +416,7 @@
         .service-card p {
             color: var(--text-light);
             font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         /* ABOUT/WHY CHOOSE US */
@@ -561,23 +566,41 @@
             margin-right: 15px;
             font-size: 1.2rem;
             margin-top: 3px;
+            flex-shrink: 0;
         }
 
-        /* TESTIMONIALS */
-        .testimonials {
+        .checklist-content {
+            flex: 1;
+        }
+
+        .checklist-content strong {
+            display: inline-block;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .checklist-content span {
+            display: block;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* TEAM SECTION - UPDATED */
+        .team {
             background-color: #f9fafd;
             position: relative;
         }
 
-        .testimonial-slider {
-            max-width: 800px;
+        .team-slider {
+            max-width: 900px;
             margin: 0 auto 60px;
             position: relative;
             overflow: hidden;
-            min-height: 320px;
+            min-height: 400px;
         }
 
-        .testimonial-slide {
+        .team-slide {
             position: absolute;
             top: 0;
             left: 0;
@@ -590,12 +613,12 @@
             text-align: center;
         }
 
-        .testimonial-slide.active {
+        .team-slide.active {
             opacity: 1;
             position: relative;
         }
 
-        .testimonial-card {
+        .team-card {
             background: white;
             border-radius: var(--radius);
             padding: 40px;
@@ -603,9 +626,11 @@
             margin-bottom: 30px;
             position: relative;
             border: 2px solid rgba(0, 200, 150, 0.1);
+            width: 100%;
+            max-width: 700px;
         }
 
-        .testimonial-card::before {
+        .team-card::before {
             content: '"';
             position: absolute;
             top: 20px;
@@ -620,45 +645,56 @@
             opacity: 0.3;
         }
 
-        .testimonial-text {
+        .team-text {
             font-size: 1.1rem;
-            font-style: italic;
             color: var(--text);
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             position: relative;
             z-index: 1;
+            line-height: 1.8;
+            text-align: left;
         }
 
-        .client-info {
+        .member-info {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
             gap: 15px;
+            margin-bottom: 20px;
         }
 
-        .client-avatar {
-            width: 60px;
-            height: 60px;
+        .member-avatar {
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--secondary), var(--purple));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 600;
+            object-fit: cover;
+            border: 4px solid var(--secondary);
             box-shadow: 0 5px 15px rgba(0, 200, 150, 0.3);
+            order: 1;
         }
 
-        .client-details h4 {
+        .member-details {
+            order: 2;
+        }
+
+        .member-details h4 {
             color: var(--primary);
             font-weight: 600;
             margin-bottom: 5px;
+            font-size: 1.5rem;
         }
 
-        .client-details p {
+        .member-details p {
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .member-role {
+            color: var(--secondary);
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
         }
 
         .slider-controls {
@@ -691,7 +727,7 @@
             transform: translateY(-3px);
         }
 
-        .testimonial-dots {
+        .team-dots {
             display: flex;
             gap: 10px;
         }
@@ -710,7 +746,7 @@
             transform: scale(1.3);
         }
 
-        .testimonial-cta {
+        .team-cta {
             text-align: center;
         }
 
@@ -1032,6 +1068,11 @@
             .logo-watermark {
                 background-size: 200px;
             }
+            
+            .hero-background {
+                background-size: cover;
+                opacity: 0.1;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1090,10 +1131,6 @@
                 justify-content: center;
             }
             
-            .logo-illustration {
-                max-width: 100%;
-            }
-            
             .section-title {
                 font-size: 2rem;
             }
@@ -1108,6 +1145,11 @@
             
             .logo-watermark {
                 background-size: 150px;
+            }
+            
+            .hero-background {
+                background-size: cover;
+                opacity: 0.08;
             }
         }
 
@@ -1129,7 +1171,7 @@
                 margin: 20px;
             }
             
-            .testimonial-card {
+            .team-card {
                 padding: 30px 20px;
             }
             
@@ -1139,6 +1181,15 @@
             
             .logo-watermark {
                 background-size: 120px;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .hero-subtitle span {
+                padding: 4px 10px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -1151,8 +1202,8 @@
     <nav id="navbar">
         <div class="container nav-container">
             <div class="logo-container">
-                <img src="https://drive.google.com/thumbnail?id=1MMQNDQawcpbK2M5qwN9qi6kvU31oY0-r&sz=w1000" alt="YozoraTech Logo" class="logo-img">
-                <span class="logo-text">YozoraTech</span>
+                <img src="https://drive.google.com/thumbnail?id=1MMQNDQawcpbK2M5qwN9qi6kvU31oY0-r&sz=w1000" alt="Yozora Technologies Logo" class="logo-img">
+                <span class="logo-text">Yozora Technologies</span>
             </div>
             
             <div class="nav-links">
@@ -1177,17 +1228,21 @@
 
     <!-- HERO SECTION -->
     <section class="hero" id="home">
+        <div class="hero-background"></div>
         <div class="container hero-content">
             <div class="hero-text">
                 <h1>We Build Scalable & Stunning Web Solutions</h1>
-                <p class="hero-subtitle"><span>Websites</span> • <span>Web Apps</span> • <span>UI/UX</span> • <span>Cloud Solutions</span></p>
+                <p class="hero-subtitle">
+                    <span>Websites</span> • 
+                    <span>Web Apps</span> • 
+                    <span>UI/UX Design</span> 
+                    <span>E-Commerce</span> • 
+                    <span>API Integration</span>  
+                </p>
                 <div class="hero-buttons">
                     <a href="#contact" class="btn btn-primary">Start Your Project</a>
                     <a href="#services" class="btn btn-secondary">View Services</a>
                 </div>
-            </div>
-            <div class="hero-illustration">
-                <img src="https://drive.google.com/thumbnail?id=1uonl-qqWHMEV9xjJBVrOaMrK2f7OkwOH&sz=w1000" alt="YozoraTech Rocket Logo" class="logo-illustration">
             </div>
         </div>
         <div class="wave-separator">
@@ -1225,10 +1280,24 @@
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-cloud"></i>
+                        <i class="fas fa-shopping-cart"></i>
                     </div>
-                    <h3>Cloud & DevOps</h3>
-                    <p>Scalable cloud solutions & hosting with CI/CD pipelines for reliable and efficient deployments.</p>
+                    <h3>E-Commerce Development</h3>
+                    <p>Specialized in building online stores, including shopping carts, payment gateways and product management systems.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>API Development</h3>
+                    <p>Connecting third-party services or integrating front-end and back-end systems with robust APIs.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3>System Integration</h3>
+                    <p>Seamlessly integrate multiple systems and platforms to create unified digital ecosystems.</p>
                 </div>
             </div>
         </div>
@@ -1250,15 +1319,51 @@
                         </div>
                     </div>
                     <div class="about-right">
-                        <h2>Why Choose YozoraTech?</h2>
+                        <h2>Why Choose Yozora Technologies?</h2>
                         <p>We combine technical expertise with creative design to deliver web solutions that drive business growth. Our team stays ahead of industry trends to ensure your digital presence is both modern and effective.</p>
                         <ul class="checklist">
-                            <li><i class="fas fa-check-circle"></i> <strong>Experienced Team:</strong> Skilled professionals with diverse expertise</li>
-                            <li><i class="fas fa-check-circle"></i> <strong>Modern Tech Stack:</strong> Latest frameworks and technologies</li>
-                            <li><i class="fas fa-check-circle"></i> <strong>Agile Development:</strong> Flexible and iterative approach</li>
-                            <li><i class="fas fa-check-circle"></i> <strong>On-Time Delivery:</strong> We respect deadlines and budgets</li>
-                            <li><i class="fas fa-check-circle"></i> <strong>Client-Focused:</strong> Your success is our priority</li>
-                            <li><i class="fas fa-check-circle"></i> <strong>Quality Assurance:</strong> Rigorous testing for flawless results</li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <div class="checklist-content">
+                                    <strong>Experienced Team:</strong>
+                                    <span>Skilled professionals with diverse expertise</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <div class="checklist-content">
+                                    <strong>Modern Tech Stack:</strong>
+                                    <span>Latest frameworks and technologies</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <div class="checklist-content">
+                                    <strong>Agile Development:</strong>
+                                    <span>Flexible and iterative approach</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <div class="checklist-content">
+                                    <strong>On-Time Delivery:</strong>
+                                    <span>We respect deadlines and budgets</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <div class="checklist-content">
+                                    <strong>Client-Focused:</strong>
+                                    <span>Your success is our priority</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <div class="checklist-content">
+                                    <strong>Quality Assurance:</strong>
+                                    <span>Rigorous testing for flawless results</span>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -1266,68 +1371,71 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section class="testimonials">
+    <!-- TEAM SECTION -->
+    <section class="team">
         <div class="container">
-            <h2 class="section-title">Client Testimonials</h2>
+            <h2 class="section-title">Our Team</h2>
             
-            <div class="testimonial-slider">
-                <div class="testimonial-slide active">
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"YozoraTech delivered exceptional results ahead of schedule. Their technical expertise and attention to detail transformed our digital presence completely."</p>
-                    </div>
-                    <div class="client-info">
-                        <div class="client-avatar">SC</div>
-                        <div class="client-details">
-                            <h4>Startup CEO</h4>
-                            <p>Tech Innovator</p>
+            <div class="team-slider">
+                <div class="team-slide active">
+                    <div class="member-info">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Marcus Rodriguez" class="member-avatar">
+                        <div class="member-details">
+                            <h4>Marcus Rodriguez</h4>
+                            <p class="member-role">CTO & Solutions Architect</p>
+                            <p>Expert in scalable systems and cloud infrastructure</p>
                         </div>
+                    </div>
+                    <div class="team-card">
+                        <p class="team-text">"Technology evolves rapidly, and staying ahead requires continuous learning. I oversee our technical architecture and ensure we're implementing the most effective solutions for our clients. At Yozora Technologies, we build scalable systems that grow with your business while maintaining security and performance as top priorities."</p>
                     </div>
                 </div>
                 
-                <div class="testimonial-slide">
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"Professional, responsive, and highly skilled. The website they built increased our online conversions by 65% in just three months."</p>
-                    </div>
-                    <div class="client-info">
-                        <div class="client-avatar">MD</div>
-                        <div class="client-details">
-                            <h4>Marketing Director</h4>
-                            <p>E-commerce Brand</p>
+                <div class="team-slide">
+                    <div class="member-info">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Alex Chen" class="member-avatar">
+                        <div class="member-details">
+                            <h4>Alex Chen</h4>
+                            <p class="member-role">CEO & Lead Developer</p>
+                            <p>15+ years experience in web technologies</p>
                         </div>
+                    </div>
+                    <div class="team-card">
+                        <p class="team-text">"With over 15 years in the web development industry, I've witnessed the evolution of digital technologies firsthand. At Yozora Technologies, we combine this experience with innovative approaches to deliver solutions that not only meet but exceed client expectations. Our focus is on creating digital experiences that drive real business value."</p>
                     </div>
                 </div>
                 
-                <div class="testimonial-slide">
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"From concept to launch, YozoraTech demonstrated outstanding project management. Our dashboard project exceeded all expectations."</p>
-                    </div>
-                    <div class="client-info">
-                        <div class="client-avatar">CTO</div>
-                        <div class="client-details">
-                            <h4>Chief Technology Officer</h4>
-                            <p>Enterprise Solutions</p>
+                <div class="team-slide">
+                    <div class="member-info">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b786d4d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Sarah Johnson" class="member-avatar">
+                        <div class="member-details">
+                            <h4>Sarah Johnson</h4>
+                            <p class="member-role">Creative Director</p>
+                            <p>UI/UX specialist with 12 years experience</p>
                         </div>
+                    </div>
+                    <div class="team-card">
+                        <p class="team-text">"My passion lies in creating user experiences that are not only beautiful but also intuitive and functional. I believe great design solves problems and enhances people's lives. At Yozora Technologies, we approach every project with empathy for the end-user, ensuring our designs are both aesthetically pleasing and highly usable."</p>
                     </div>
                 </div>
             </div>
             
             <div class="slider-controls">
-                <div class="slider-arrow" id="prevTestimonial">
+                <div class="slider-arrow" id="prevTeam">
                     <i class="fas fa-chevron-left"></i>
                 </div>
-                <div class="testimonial-dots">
+                <div class="team-dots">
                     <span class="dot active" data-index="0"></span>
                     <span class="dot" data-index="1"></span>
                     <span class="dot" data-index="2"></span>
                 </div>
-                <div class="slider-arrow" id="nextTestimonial">
+                <div class="slider-arrow" id="nextTeam">
                     <i class="fas fa-chevron-right"></i>
                 </div>
             </div>
             
-            <div class="testimonial-cta">
-                <a href="#contact" class="btn btn-primary btn-large" style="margin-top: 50px;">Get In Touch</a>
+            <div class="team-cta">
+                <a href="#contact" class="btn btn-primary btn-large" style="margin-top: 50px;">Meet Our Team</a>
             </div>
         </div>
     </section>
@@ -1385,8 +1493,8 @@
             <div class="footer-container">
                 <div class="footer-col">
                     <div class="footer-logo">
-                        <img src="https://drive.google.com/thumbnail?id=1MMQNDQawcpbK2M5qwN9qi6kvU31oY0-r&sz=w1000" alt="YozoraTech Logo" class="footer-logo-img">
-                        <span class="footer-logo-text">YozoraTech</span>
+                        <img src="https://drive.google.com/thumbnail?id=1MMQNDQawcpbK2M5qwN9qi6kvU31oY0-r&sz=w1000" alt="Yozora Technologies Logo" class="footer-logo-img">
+                        <span class="footer-logo-text">Yozora Technologies</span>
                     </div>
                     <p class="footer-description">Professional web development & digital solutions. We build scalable, stunning web experiences that drive business growth and innovation.</p>
                     <div class="footer-contact">
@@ -1410,8 +1518,8 @@
                     <ul class="footer-services">
                         <li><a href="#services">Web Development</a></li>
                         <li><a href="#services">UI/UX Design</a></li>
-                        <li><a href="#services">Responsive Design</a></li>
-                        <li><a href="#services">Cloud & DevOps</a></li>
+                        <li><a href="#services">E-Commerce</a></li>
+                        <li><a href="#services">API Development</a></li>
                     </ul>
                 </div>
                 
@@ -1433,7 +1541,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 YozoraTech. All rights reserved. | Crafted with passion for innovative web solutions</p>
+                <p>&copy; 2024 Yozora Technologies. All rights reserved. | Crafted with passion for innovative web solutions</p>
             </div>
         </div>
     </footer>
@@ -1488,44 +1596,44 @@
             });
         });
         
-        // Testimonial Slider
-        const slides = document.querySelectorAll('.testimonial-slide');
-        const dots = document.querySelectorAll('.dot');
-        const prevBtn = document.getElementById('prevTestimonial');
-        const nextBtn = document.getElementById('nextTestimonial');
-        let currentSlide = 0;
+        // Team Slider
+        const teamSlides = document.querySelectorAll('.team-slide');
+        const teamDots = document.querySelectorAll('.team-dots .dot');
+        const prevTeamBtn = document.getElementById('prevTeam');
+        const nextTeamBtn = document.getElementById('nextTeam');
+        let currentTeamSlide = 0;
         
-        function showSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
+        function showTeamSlide(index) {
+            teamSlides.forEach(slide => slide.classList.remove('active'));
+            teamDots.forEach(dot => dot.classList.remove('active'));
             
-            currentSlide = index;
-            slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
+            currentTeamSlide = index;
+            teamSlides[currentTeamSlide].classList.add('active');
+            teamDots[currentTeamSlide].classList.add('active');
         }
         
-        function nextSlide() {
-            let nextIndex = (currentSlide + 1) % slides.length;
-            showSlide(nextIndex);
+        function nextTeamSlide() {
+            let nextIndex = (currentTeamSlide + 1) % teamSlides.length;
+            showTeamSlide(nextIndex);
         }
         
-        function prevSlide() {
-            let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(prevIndex);
+        function prevTeamSlide() {
+            let prevIndex = (currentTeamSlide - 1 + teamSlides.length) % teamSlides.length;
+            showTeamSlide(prevIndex);
         }
         
-        nextBtn.addEventListener('click', nextSlide);
-        prevBtn.addEventListener('click', prevSlide);
+        nextTeamBtn.addEventListener('click', nextTeamSlide);
+        prevTeamBtn.addEventListener('click', prevTeamSlide);
         
-        dots.forEach(dot => {
+        teamDots.forEach(dot => {
             dot.addEventListener('click', () => {
                 const index = parseInt(dot.getAttribute('data-index'));
-                showSlide(index);
+                showTeamSlide(index);
             });
         });
         
-        // Auto slide testimonials every 5 seconds
-        setInterval(nextSlide, 5000);
+        // Auto slide team every 5 seconds
+        setInterval(nextTeamSlide, 5000);
         
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
