@@ -293,18 +293,21 @@
             position: relative;
             z-index: 2;
             width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
         }
 
         .hero-text {
             flex: 1;
-            max-width: 800px;
+            max-width: 900px;
             position: relative;
             z-index: 3;
         }
 
         .hero-text h1 {
-            font-size: 3.6rem;
-            margin-bottom: 25px;
+            font-size: 3.8rem;
+            margin-bottom: 15px;
             line-height: 1.1;
             background: linear-gradient(90deg, #fff, var(--secondary));
             -webkit-background-clip: text;
@@ -313,6 +316,23 @@
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             white-space: normal;
             overflow: visible;
+        }
+
+        /* Updated: Decreased gap between h1 lines */
+        .hero-title-container {
+            margin-bottom: 10px;
+        }
+
+        .hero-title-line-1 {
+            display: block;
+            font-size: 3.8rem;
+            margin-bottom: -5px; /* Reduced from default */
+        }
+
+        .hero-title-line-2 {
+            display: block;
+            font-size: 3.8rem;
+            margin-top: -5px; /* Reduced from default */
         }
 
         .hero-tags {
@@ -1093,12 +1113,22 @@
                 font-size: 3.4rem;
                 white-space: normal;
             }
+            
+            .hero-title-line-1,
+            .hero-title-line-2 {
+                font-size: 3.4rem;
+            }
         }
 
         @media (max-width: 1024px) {
             .hero-text h1 {
                 font-size: 3rem;
                 white-space: normal;
+            }
+            
+            .hero-title-line-1,
+            .hero-title-line-2 {
+                font-size: 3rem;
             }
             
             .services-grid {
@@ -1165,6 +1195,11 @@
                 white-space: normal;
             }
             
+            .hero-title-line-1,
+            .hero-title-line-2 {
+                font-size: 2.6rem;
+            }
+            
             .hero-tags {
                 justify-content: center;
             }
@@ -1197,6 +1232,11 @@
 
         @media (max-width: 576px) {
             .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-title-line-1,
+            .hero-title-line-2 {
                 font-size: 2.2rem;
             }
             
@@ -1236,6 +1276,11 @@
             .hero-text h1 {
                 font-size: 3.5rem;
                 max-width: 900px;
+            }
+            
+            .hero-title-line-1,
+            .hero-title-line-2 {
+                font-size: 3.5rem;
             }
         }
     </style>
@@ -1285,9 +1330,11 @@
     <!-- HERO SECTION -->
     <section class="hero" id="home">
         <div class="hero-background"></div>
-        <div class="container hero-content">
+        <div class="hero-content">
             <div class="hero-text">
-                <h1>We Build Scalable & Stunning Web Solutions</h1>
+                <div class="hero-title-container">
+                    <h1><span class="hero-title-line-1">We Build Scalable & Stunning Web Solutions</span>
+                </div>
                 <div class="hero-tags">
                     <div class="hero-tag">
                         <i class="fas fa-globe"></i>
@@ -1445,48 +1492,32 @@
     <!-- TEAM SECTION -->
     <section class="team">
         <div class="container">
-            <h2 class="section-title">Our Team</h2>
+            <h2 class="section-title">Our Leaders</h2>
             
             <div class="team-slider">
                 <div class="team-slide active">
                     <div class="member-info">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Marcus Rodriguez" class="member-avatar">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b786d4d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Dhaneswar" class="member-avatar">
                         <div class="member-details">
-                            <h4>Marcus Rodriguez</h4>
-                            <p class="member-role">CTO & Solutions Architect</p>
-                            <p>Expert in scalable systems and cloud infrastructure</p>
-                        </div>
-                    </div>
-                    <div class="team-card">
-                        <p class="team-text">"Technology evolves rapidly, and staying ahead requires continuous learning. I oversee our technical architecture and ensure we're implementing the most effective solutions for our clients. At Yozora Technologies, we build scalable systems that grow with your business while maintaining security and performance as top priorities."</p>
-                    </div>
-                </div>
-                
-                <div class="team-slide">
-                    <div class="member-info">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Alex Chen" class="member-avatar">
-                        <div class="member-details">
-                            <h4>Alex Chen</h4>
+                            <h4>Dhaneswar</h4>
                             <p class="member-role">CEO & Lead Developer</p>
-                            <p>15+ years experience in web technologies</p>
                         </div>
                     </div>
                     <div class="team-card">
-                        <p class="team-text">"With over 15 years in the web development industry, I've witnessed the evolution of digital technologies firsthand. At Yozora Technologies, we combine this experience with innovative approaches to deliver solutions that not only meet but exceed client expectations. Our focus is on creating digital experiences that drive real business value."</p>
+                        <p class="team-text">"At Yozora Technologies, we believe that every great business deserves an exceptional digital presence. As a startup, we bring fresh perspectives and innovative approaches to web development. We focus on creating solutions that are not just technically sound but also drive real business results. Our agility allows us to adapt quickly to your needs and deliver personalized solutions that larger agencies often overlook."</p>
                     </div>
                 </div>
                 
                 <div class="team-slide">
                     <div class="member-info">
-                        <img src="https://images.unsplash.com/photo-1494790108755-2616b786d4d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Sarah Johnson" class="member-avatar">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b786d4d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Anitha" class="member-avatar">
                         <div class="member-details">
-                            <h4>Sarah Johnson</h4>
-                            <p class="member-role">Creative Director</p>
-                            <p>UI/UX specialist with 12 years experience</p>
+                            <h4>Anitha</h4>
+                            <p class="member-role">CTO & Solutions Architect</p>
                         </div>
                     </div>
                     <div class="team-card">
-                        <p class="team-text">"My passion lies in creating user experiences that are not only beautiful but also intuitive and functional. I believe great design solves problems and enhances people's lives. At Yozora Technologies, we approach every project with empathy for the end-user, ensuring our designs are both aesthetically pleasing and highly usable."</p>
+                        <p class="team-text">"Technology should empower businesses, not complicate them. As CTO, I ensure our solutions are built on solid technical foundations while remaining scalable and maintainable. We leverage modern technologies and best practices to create web solutions that grow with your business. Our startup mindset means we're always exploring new ways to solve problems and deliver value to our clients through innovative technical approaches."</p>
                     </div>
                 </div>
             </div>
@@ -1498,7 +1529,6 @@
                 <div class="team-dots">
                     <span class="dot active" data-index="0"></span>
                     <span class="dot" data-index="1"></span>
-                    <span class="dot" data-index="2"></span>
                 </div>
                 <div class="slider-arrow" id="nextTeam">
                     <i class="fas fa-chevron-right"></i>
@@ -1667,7 +1697,7 @@
             });
         });
         
-        // Team Slider
+        // Team Slider - Updated for 2 members
         const teamSlides = document.querySelectorAll('.team-slide');
         const teamDots = document.querySelectorAll('.team-dots .dot');
         const prevTeamBtn = document.getElementById('prevTeam');
