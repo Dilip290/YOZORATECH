@@ -424,29 +424,69 @@
             transform: translateY(0);
         }
 
-        /* Transparent Logo Watermark Background for Hero Content */
-        .hero-content::before {
-            content: '';
+        /* Enhanced Circular Logo Watermark Background for Hero Section */
+        .hero-background-logo {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 100%;
             height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .hero-background-logo::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw; /* Full viewport width */
+            height: 100vh; /* Full viewport height */
             background-image: url('https://drive.google.com/thumbnail?id=17Ko2hNH1NsHmC_6FJd4pjlrrtO6tb9KX&sz=w1000');
             background-repeat: no-repeat;
             background-position: center;
-            background-size: 500px;
-            opacity: 0.15;
-            pointer-events: none;
-            filter: grayscale(100%) brightness(1.5) contrast(0.8);
-            z-index: -1;
-            animation: gentlePulse 8s ease-in-out infinite;
+            background-size: 800px; /* Larger size for better coverage */
+            opacity: 0.25;
+            filter: grayscale(0%) brightness(1.3) contrast(0.85) saturate(1.1) blur(0.5px);
+            animation: gentlePulse 6s ease-in-out infinite;
+            -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0) 70%);
+            mask-image: radial-gradient(circle at center, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0) 70%);
         }
 
         @keyframes gentlePulse {
-            0%, 100% { opacity: 0.15; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.18; transform: translate(-50%, -50%) scale(1.02); }
+            0%, 100% { 
+                opacity: 0.25;
+                transform: translate(-50%, -50%) scale(1);
+                filter: grayscale(0%) brightness(1.3) contrast(0.85) saturate(1.1) blur(0.5px);
+            }
+            50% { 
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(1.05);
+                filter: grayscale(0%) brightness(1.5) contrast(0.85) saturate(1.2) blur(0.5px);
+            }
+        }
+
+        /* Edge fade effect for seamless blending */
+        .hero-background-logo::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at center,
+                transparent 0%,
+                rgba(13, 27, 54, 0.1) 40%,
+                rgba(13, 27, 54, 0.3) 60%,
+                rgba(13, 27, 54, 0.7) 80%,
+                rgba(13, 27, 54, 0.95) 100%
+            );
+            pointer-events: none;
+            z-index: 2;
         }
 
         .hero-text h1 {
@@ -460,7 +500,7 @@
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             animation: glow 3s ease-in-out infinite alternate;
             position: relative;
-            z-index: 2;
+            z-index: 4;
         }
 
         @keyframes glow {
@@ -477,7 +517,7 @@
             margin-right: auto;
             line-height: 1.6;
             position: relative;
-            z-index: 2;
+            z-index: 4;
         }
 
         .hero-tags {
@@ -488,7 +528,7 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            z-index: 2;
+            z-index: 4;
         }
 
         .hero-tag {
@@ -505,7 +545,7 @@
             gap: 10px;
             backdrop-filter: blur(10px);
             position: relative;
-            z-index: 2;
+            z-index: 4;
         }
 
         .hero-tag:hover {
@@ -526,7 +566,7 @@
             flex-wrap: wrap;
             justify-content: center;
             position: relative;
-            z-index: 2;
+            z-index: 4;
         }
 
         .wave-separator {
@@ -537,7 +577,7 @@
             overflow: hidden;
             line-height: 0;
             transform: rotate(180deg);
-            z-index: 2;
+            z-index: 4;
         }
 
         .wave-separator svg {
@@ -1556,6 +1596,10 @@
             .hero-text h1 {
                 font-size: 3.5rem;
             }
+            
+            .hero-background-logo::before {
+                background-size: 700px;
+            }
         }
 
         @media (max-width: 1024px) {
@@ -1584,8 +1628,8 @@
                 font-size: 3rem;
             }
             
-            .hero-content::before {
-                background-size: 400px;
+            .hero-background-logo::before {
+                background-size: 600px;
             }
         }
 
@@ -1637,8 +1681,8 @@
                 padding: 30px;
             }
             
-            .hero-content::before {
-                background-size: 300px;
+            .hero-background-logo::before {
+                background-size: 500px;
             }
         }
 
@@ -1671,8 +1715,8 @@
                 padding: 30px 20px;
             }
             
-            .hero-content::before {
-                background-size: 250px;
+            .hero-background-logo::before {
+                background-size: 400px;
             }
         }
 
@@ -1685,7 +1729,7 @@
             .logo-watermark,
             .floating-element,
             .animated-orbit,
-            .hero-content::before {
+            .hero-background-logo::before {
                 animation: none;
             }
         }
@@ -1740,6 +1784,7 @@
     <!-- HERO SECTION -->
     <section class="hero" id="home">
         <div class="hero-background"></div>
+        <div class="hero-background-logo"></div>
         <div class="floating-elements">
             <div class="floating-element"></div>
             <div class="floating-element"></div>
@@ -1907,7 +1952,7 @@
     <!-- TEAM SECTION -->
     <section class="team">
         <div class="container">
-            <h2 class="section-title">Our Leaders</h2>
+            <h2 class="section-title">Our Leadership</h2>
             
             <div class="team-slider">
                 <div class="team-slide active">
