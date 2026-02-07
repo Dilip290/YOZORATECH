@@ -199,6 +199,128 @@
             border-radius: 3px;
         }
 
+        /* Google Form Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 27, 54, 0.95);
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .job-application-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 95%;
+            max-width: 800px;
+            max-height: 90vh;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            z-index: 10000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: none;
+            flex-direction: column;
+        }
+
+        .job-application-modal.active {
+            display: flex;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 25px 30px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 0;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .form-loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 200, 150, 0.2);
+            border-top: 5px solid var(--secondary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .google-form-container {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0 0 var(--radius) var(--radius);
+        }
+
         /* Enhanced NAVBAR */
         nav {
             background-color: rgba(13, 27, 54, 0.95);
@@ -1033,7 +1155,7 @@
             transform: scale(1.4);
         }
 
-        /* ENHANCED CAREERS SECTION */
+        /* ENHANCED CAREERS SECTION - Updated for Web Application Developer Role */
         .careers {
             background-color: white;
             position: relative;
@@ -1059,32 +1181,31 @@
             line-height: 1.8;
         }
 
-        .careers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 35px;
-            margin-bottom: 70px;
-        }
-
-        .career-card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 40px 35px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-            transition: var(--transition);
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
+        .single-job-post {
+            max-width: 900px;
+            margin: 0 auto 70px;
             opacity: 0;
             transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        .career-card.visible {
+        .single-job-post.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .career-card::before {
+        .job-header {
+            background: white;
+            border-radius: var(--radius);
+            padding: 50px 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            position: relative;
+            border: 2px solid rgba(0, 200, 150, 0.1);
+            text-align: center;
+        }
+
+        .job-header::before {
             content: '';
             position: absolute;
             top: 0;
@@ -1094,100 +1215,136 @@
             background: var(--gradient-primary);
         }
 
-        .career-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
-            border-color: rgba(0, 200, 150, 0.2);
+        .job-company-logo {
+            height: 70px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
         }
 
-        .career-icon {
+        .job-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .job-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .job-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .job-meta-item i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .job-applicants {
             background: linear-gradient(135deg, rgba(0, 200, 150, 0.1), rgba(138, 79, 255, 0.1));
-            width: 80px;
-            height: 80px;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 500;
+            color: var(--primary);
+            display: inline-block;
+            border: 2px solid rgba(0, 200, 150, 0.2);
+        }
+
+        .job-details {
+            background: white;
+            border-radius: var(--radius);
+            padding: 50px 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+        }
+
+        .job-section {
+            margin-bottom: 40px;
+        }
+
+        .job-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .job-section h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .job-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .job-section p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .qualifications-list, .responsibilities-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .qualifications-list li, .responsibilities-list li {
+            margin-bottom: 15px;
+            color: var(--text);
+            position: relative;
+            padding-left: 35px;
+            line-height: 1.6;
+        }
+
+        .qualifications-list li::before, .responsibilities-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(135deg, rgba(0, 200, 150, 0.1), rgba(138, 79, 255, 0.1));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 25px;
-            color: var(--secondary);
-            font-size: 32px;
-            border: 2px solid rgba(0, 200, 150, 0.2);
-            transition: var(--transition);
         }
 
-        .career-card:hover .career-icon {
-            background: var(--gradient-primary);
-            color: white;
-            transform: rotate(15deg) scale(1.1);
-            box-shadow: 0 10px 20px rgba(0, 200, 150, 0.3);
-        }
-
-        .career-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--primary);
+        .job-apply-button {
             text-align: center;
+            margin-top: 50px;
         }
 
-        .career-tags {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+        .job-apply-button .btn {
+            padding: 15px 45px;
+            font-size: 1.2rem;
         }
 
-        .career-tag {
-            background: rgba(13, 27, 54, 0.08);
-            color: var(--primary);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .career-card:hover .career-tag {
-            background: var(--gradient-primary);
-            color: white;
-        }
-
-        .career-desc {
-            color: var(--text-light);
-            margin-bottom: 25px;
-            font-size: 1rem;
-            line-height: 1.7;
-            text-align: center;
-        }
-
-        .career-responsibilities {
-            text-align: left;
-            margin-bottom: 30px;
-            padding-left: 0;
-        }
-
-        .career-responsibilities li {
-            margin-bottom: 12px;
-            color: var(--text);
-            font-size: 0.95rem;
-            position: relative;
-            padding-left: 25px;
-            line-height: 1.5;
-        }
-
-        .career-responsibilities li::before {
-            content: '✓';
-            color: var(--secondary);
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-
-        .career-card .btn {
-            width: 100%;
-            margin-top: 10px;
-        }
-
+        /* #### REPLACE THIS GOOGLE FORM LINK #### */
+        /* Your Google Form Link: https://docs.google.com/forms/d/e/1FAIpQLSf0-EJpUfu31nKyYkH4GhqarRJsL-ixsSXFCDpgMMJvEGBeig/viewform?usp=sf_link */
+        /* Note: For better embedding, use the /viewform?embedded=true version */
+        
         .careers-cta {
             background: linear-gradient(135deg, rgba(0, 200, 150, 0.05), rgba(138, 79, 255, 0.05));
             border-radius: var(--radius);
@@ -1616,8 +1773,7 @@
                 padding: 40px;
             }
             
-            .services-grid,
-            .careers-grid {
+            .services-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             
@@ -1660,7 +1816,6 @@
             }
             
             .services-grid,
-            .careers-grid,
             .contact-cards {
                 grid-template-columns: 1fr;
             }
@@ -1682,8 +1837,27 @@
                 padding: 30px;
             }
             
+            .job-header,
+            .job-details {
+                padding: 30px 20px;
+            }
+            
+            .job-title {
+                font-size: 2rem;
+            }
+            
+            .job-meta {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
             .hero-background-logo::before {
                 background-size: 500px;
+            }
+            
+            .job-application-modal {
+                width: 98%;
+                max-height: 85vh;
             }
         }
 
@@ -1741,6 +1915,34 @@
     <div class="logo-watermark"></div>
     <!-- Static watermark for better performance -->
     <div class="static-watermark"></div>
+    
+    <!-- Google Form Modal -->
+    <div class="modal-overlay" id="applicationModalOverlay"></div>
+    <div class="job-application-modal" id="applicationModal">
+        <div class="modal-header">
+            <h3>Apply for Web Application Developer Position</h3>
+            <button class="modal-close" id="modalClose">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-loading" id="formLoading">
+                <div class="spinner"></div>
+                <p>Loading application form...</p>
+            </div>
+            <!-- #### REPLACE THIS GOOGLE FORM IFRAME SRC #### -->
+            <!-- Use your Google Form link with /viewform?embedded=true -->
+            <iframe 
+                src="https://docs.google.com/forms/d/e/1FAIpQLSf0-EJpUfu31nKyYkH4GhqarRJsL-ixsSXFCDpgMMJvEGBeig/viewform?embedded=true" 
+                class="google-form-container" 
+                id="googleFormIframe"
+                frameborder="0" 
+                marginheight="0" 
+                marginwidth="0"
+                onload="document.getElementById('formLoading').style.display = 'none';"
+                style="display: none;">
+                Loading…
+            </iframe>
+        </div>
+    </div>
     
     <!-- NAVBAR -->
     <nav id="navbar">
@@ -1998,7 +2200,7 @@
         </div>
     </section>
 
-    <!-- CAREERS SECTION -->
+    <!-- CAREERS SECTION - Updated for Web Application Developer Role -->
     <section class="careers" id="careers">
         <div class="container">
             <h2 class="section-title">Join Our Team</h2>
@@ -2009,80 +2211,85 @@
                 </p>
             </div>
             
-            <div class="careers-grid">
-                <!-- Frontend Developer -->
-                <div class="career-card">
-                    <div class="career-icon">
-                        <i class="fas fa-code"></i>
+            <div class="single-job-post">
+                <!-- Web Application Developer Job Post -->
+                <div class="job-header">
+                    <img src="https://drive.google.com/thumbnail?id=17Ko2hNH1NsHmC_6FJd4pjlrrtO6tb9KX&sz=w1000" alt="Yozora Technologies Logo" class="job-company-logo">
+                    <h1 class="job-title">Web Application Developer</h1>
+                    
+                    <div class="job-meta">
+                        <div class="job-meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Hyderabad, Telangana, India</span>
+                        </div>
+                        <div class="job-meta-item">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Full-time</span>
+                        </div>
+                        <div class="job-meta-item">
+                            <i class="fas fa-building"></i>
+                            <span>On-site</span>
+                        </div>
                     </div>
-                    <h3>Frontend Developer</h3>
-                    <div class="career-tags">
-                        <span class="career-tag">React</span>
-                        <span class="career-tag">Vue.js</span>
-                        <span class="career-tag">TypeScript</span>
-                        <span class="career-tag">JavaScript</span>
+                    
+                    <div class="job-applicants">
+                        <i class="fas fa-users"></i>
+                        Over 100 applicants
                     </div>
-                    <p class="career-desc">Build responsive, interactive user interfaces using modern frameworks and libraries. Create seamless user experiences across all devices.</p>
-                    <ul class="career-responsibilities">
-                        <li>Develop responsive web applications</li>
-                        <li>Implement UI/UX designs with precision</li>
-                        <li>Optimize frontend performance</li>
-                        <li>Collaborate with backend developers</li>
-                        <li>Write clean, maintainable code</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary">Apply Now</a>
                 </div>
                 
-                <!-- UI/UX Designer -->
-                <div class="career-card">
-                    <div class="career-icon">
-                        <i class="fas fa-palette"></i>
+                <div class="job-details">
+                    <div class="job-section">
+                        <h3>About the Job</h3>
+                        <p>
+                            This is a full-time, on-site role for a Web Application Developer located in Hyderabad. The Web Application Developer will be responsible for developing and maintaining custom web applications, designing back-end systems, and implementing scalable solutions to meet client requirements. The role includes collaborating with cross-functional teams, writing and testing clean, efficient code, and optimizing applications for performance and scalability. The developer will contribute to system architecture design and ensure alignment with project goals and deadlines.
+                        </p>
                     </div>
-                    <h3>UI/UX Designer</h3>
-                    <div class="career-tags">
-                        <span class="career-tag">Figma</span>
-                        <span class="career-tag">Adobe XD</span>
-                        <span class="career-tag">Prototyping</span>
-                        <span class="career-tag">User Research</span>
+                    
+                    <div class="job-section">
+                        <h3>Company Description</h3>
+                        <p>
+                            Yozora Technologies, a Hyderabad-based startup founded in 2024, specializes in creating scalable and high-performance web solutions tailored to drive business growth and user engagement. With expertise in custom web applications, e-commerce platforms, UI/UX design, and API development, Yozora Technologies emphasizes scalable architecture, user-centric design, and performance optimization. Combining modern technology, agile methodologies, and a commitment to quality assurance, the company ensures timely delivery of innovative web solutions. Yozora Technologies takes pride in offering responsive and client-focused services to help businesses establish exceptional digital presences.
+                        </p>
                     </div>
-                    <p class="career-desc">Create beautiful, user-friendly designs that solve real business problems. Translate complex requirements into intuitive interfaces.</p>
-                    <ul class="career-responsibilities">
-                        <li>Design web and mobile interfaces</li>
-                        <li>Create wireframes and prototypes</li>
-                        <li>Conduct user research and testing</li>
-                        <li>Develop design systems</li>
-                        <li>Collaborate with developers</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary">Apply Now</a>
-                </div>
-                
-                <!-- Full Stack Developer -->
-                <div class="career-card">
-                    <div class="career-icon">
-                        <i class="fas fa-server"></i>
+                    
+                    <div class="job-section">
+                        <h3>Qualifications</h3>
+                        <ul class="qualifications-list">
+                            <li>Proficiency in Web Application Development and Back-End Web Development</li>
+                            <li>Experience in building and maintaining Web Applications and Software Development</li>
+                            <li>Strong understanding of Object-Oriented Programming (OOP)</li>
+                            <li>Ability to collaborate in a team environment and meet delivery timelines</li>
+                            <li>Knowledge of modern frameworks, version control systems, and responsive design principles</li>
+                            <li>Bachelor's degree in Computer Science, Software Engineering, or a related field</li>
+                            <li>Experience with APIs, database management, or agile development processes is a plus</li>
+                        </ul>
                     </div>
-                    <h3>Full Stack Developer</h3>
-                    <div class="career-tags">
-                        <span class="career-tag">Node.js</span>
-                        <span class="career-tag">Python</span>
-                        <span class="career-tag">MongoDB</span>
-                        <span class="career-tag">API Development</span>
+                    
+                    <div class="job-section">
+                        <h3>Key Responsibilities</h3>
+                        <ul class="responsibilities-list">
+                            <li>Develop and maintain custom web applications</li>
+                            <li>Design and implement back-end systems</li>
+                            <li>Write and test clean, efficient code</li>
+                            <li>Optimize applications for performance and scalability</li>
+                            <li>Collaborate with cross-functional teams</li>
+                            <li>Contribute to system architecture design</li>
+                            <li>Ensure alignment with project goals and deadlines</li>
+                        </ul>
                     </div>
-                    <p class="career-desc">Work on both frontend and backend to build complete web solutions. Handle everything from database design to frontend implementation.</p>
-                    <ul class="career-responsibilities">
-                        <li>Develop RESTful APIs and microservices</li>
-                        <li>Database design and optimization</li>
-                        <li>End-to-end feature implementation</li>
-                        <li>System architecture planning</li>
-                        <li>DevOps and deployment management</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary">Apply Now</a>
+                    
+                    <div class="job-apply-button">
+                        <button class="btn btn-primary btn-large" id="applyNowButton">
+                            <i class="fas fa-paper-plane"></i> Apply Now
+                        </button>
+                    </div>
                 </div>
             </div>
             
             <div class="careers-cta">
                 <div class="cta-box">
-                    <h3>Don't See Your Perfect Role?</h3>
+                    <h3>Looking for a Different Role?</h3>
                     <p>We're always looking for talented individuals who are passionate about technology. Send us your resume and tell us how you can contribute to our team. We value creativity, problem-solving skills, and a growth mindset.</p>
                     <a href="mailto:admin@yozoratech.com?subject=Spontaneous Application - Yozora Technologies" class="btn btn-secondary btn-large">Submit General Application</a>
                 </div>
@@ -2328,10 +2535,55 @@
             });
         });
         
+        // Google Form Modal Functionality
+        const applyNowButton = document.getElementById('applyNowButton');
+        const modalOverlay = document.getElementById('applicationModalOverlay');
+        const applicationModal = document.getElementById('applicationModal');
+        const modalClose = document.getElementById('modalClose');
+        const googleFormIframe = document.getElementById('googleFormIframe');
+        const formLoading = document.getElementById('formLoading');
+        
+        function openApplicationModal() {
+            // Show loading state
+            formLoading.style.display = 'flex';
+            googleFormIframe.style.display = 'none';
+            
+            // #### IMPORTANT: Use the embedded version of your Google Form ####
+            // Replace the iframe src with your Google Form link + "?embedded=true"
+            googleFormIframe.src = "https://docs.google.com/forms/d/e/1FAIpQLSf0-EJpUfu31nKyYkH4GhqarRJsL-ixsSXFCDpgMMJvEGBeig/viewform?embedded=true";
+            
+            // Show modal and overlay
+            modalOverlay.classList.add('active');
+            applicationModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeApplicationModal() {
+            modalOverlay.classList.remove('active');
+            applicationModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        applyNowButton.addEventListener('click', openApplicationModal);
+        modalClose.addEventListener('click', closeApplicationModal);
+        modalOverlay.addEventListener('click', closeApplicationModal);
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && applicationModal.classList.contains('active')) {
+                closeApplicationModal();
+            }
+        });
+        
+        // Prevent modal closing when clicking inside modal
+        applicationModal.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+        
         // Scroll animations
         function animateOnScroll() {
             const sections = document.querySelectorAll('section');
-            const elements = document.querySelectorAll('.section-title, .service-card, .about-section, .careers-intro, .career-card, .careers-cta, .contact-section, .contact-message, .contact-card, .contact-cta, .team-card, .member-info, .checklist li');
+            const elements = document.querySelectorAll('.section-title, .service-card, .about-section, .careers-intro, .single-job-post, .careers-cta, .contact-section, .contact-message, .contact-card, .contact-cta, .team-card, .member-info, .checklist li');
             
             elements.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
@@ -2380,7 +2632,7 @@
             });
             
             // Add hover effects to cards
-            document.querySelectorAll('.service-card, .career-card, .contact-card').forEach(card => {
+            document.querySelectorAll('.service-card, .contact-card').forEach(card => {
                 card.addEventListener('mouseenter', function() {
                     this.style.transform = 'translateY(-15px)';
                 });
@@ -2408,7 +2660,7 @@
         }, observerOptions);
         
         // Observe all animated elements
-        document.querySelectorAll('.section-title, .service-card, .about-section, .careers-intro, .career-card, .careers-cta, .contact-section, .contact-message, .contact-card, .contact-cta, .team-card, .member-info').forEach(el => {
+        document.querySelectorAll('.section-title, .service-card, .about-section, .careers-intro, .single-job-post, .careers-cta, .contact-section, .contact-message, .contact-card, .contact-cta, .team-card, .member-info').forEach(el => {
             observer.observe(el);
         });
         
